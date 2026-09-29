@@ -6,7 +6,10 @@
   "scripts": {
     "test": "concurrently --group=true pnpm:test:\\*",
     "format": "prettier --write --list-different .",
-    "test:format": "prettier --check ."
+    "test:format": "prettier --check .",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "test:unit": "node --enable-source-maps --test './test/**/*.test.ts'"
   },
   "keywords": [],
   "author": "",
@@ -24,9 +27,11 @@
     "access": "public"
   },
   "devDependencies": {
+    "@types/node": "^26.6.3",
     "concurrently": "^10.0.5",
     "prettier": "^3.9.9",
     "prettier-cli": "^0.1.0",
-    "prettier-plugin-packagejson": "^3.0.2"
+    "prettier-plugin-packagejson": "^3.0.2",
+    "typescript": "~6.0.3"
   }
 }
