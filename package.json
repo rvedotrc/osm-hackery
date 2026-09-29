@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "concurrently --group=true pnpm:test:\\*"
+    "test": "concurrently --group=true pnpm:test:\\*",
+    "format": "prettier --write --list-different .",
+    "test:format": "prettier --check ."
   },
   "keywords": [],
   "author": "",
@@ -22,6 +24,9 @@
     "access": "public"
   },
   "devDependencies": {
-    "concurrently": "^10.0.5"
+    "concurrently": "^10.0.5",
+    "prettier": "^3.9.9",
+    "prettier-cli": "^0.1.0",
+    "prettier-plugin-packagejson": "^3.0.2"
   }
 }
