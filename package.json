@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "concurrently --group=true pnpm:test:\\*"
   },
   "keywords": [],
   "author": "",
@@ -20,5 +20,8 @@
   "type": "module",
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
   }
 }
