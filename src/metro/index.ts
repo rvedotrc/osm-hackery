@@ -1,8 +1,8 @@
+import { doThrow } from "@blaahaj/gotcha/Throw";
 import { basename } from "path";
 import writeFile from "write-file-atomic";
 
 import { getRelation } from "../download.js";
-// import { dumpIt } from "../dumpIt.js";
 import { isMember } from "../zodSchema.js";
 import { masterRelations } from "./config.js";
 import { mergeStationsWithSameId } from "./mergeStations.js";
@@ -28,19 +28,17 @@ const run = async () => {
         const routeMasterId = basename(routeMasterRelationUrl);
         console.log(`routeMaster ${routeMasterId}`);
         const routeMaster = (await getRelation(routeMasterId)).children[0]!;
-        // dumpIt(routeMaster, "routeMaster");
 
         const line: LineWithCode = {
           k: `kbh${routeMasterCode}`,
           v: {
-            name: tagOf(routeMaster, "name") ?? "?",
-            color:
-              tagOf(routeMaster, "colour") ??
-              tagOf(routeMaster, "color") ??
-              "#777",
-            backgroundColor: "#fff", // what is this for?
-            textColor: "#000", // what is this for?
-            order: 0,
+            name:
+              tagOf(routeMaster, "name") ??
+              doThrow(`Route master ${routeMasterCode} has no name`),
+            color: tagOf(routeMaster, "colour") ?? "#ff34a3",
+            backgroundColor: "#ccc",
+            textColor: "#fff",
+            order: dataFile.lines.length + 1,
           },
         };
         dataFile.lines.push(line);
@@ -55,13 +53,6 @@ const run = async () => {
           console.log(`  route ${routeId}`);
           const relationsOfRoute = (await getRelation(routeId)).children;
 
-          // relationsOfRoute.forEach((i) => dumpIt(i));
-
-          // for (const rel of relationsOfRoute) {
-          //   const full = await getFull("relation", rel.attributes.id);
-          //   dumpIt(full, `item of relationsOfRoute`);
-          // }
-
           const foundStops = await findStops(line, relationsOfRoute);
 
           for (const s of foundStops) {
@@ -73,18 +64,16 @@ const run = async () => {
                 coordinates: [s.lon, s.lat],
               },
               properties: {
-                id: "",
+                id: 0,
                 name: s.name,
-                // FIXME: returning an array of strings seems to cause a crash
-                long_name: s.alternate_names[1],
-                short_name: s.alternate_names[0],
+                alternate_names: s.alternate_names,
                 line: line.k,
               },
             };
 
             const id = await getIdForStation(station);
             station.id = id;
-            station.properties.id = String(id);
+            station.properties.id = id;
 
             dataFile.stations.push(station);
           }

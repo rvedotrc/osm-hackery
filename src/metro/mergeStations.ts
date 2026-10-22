@@ -3,7 +3,7 @@ import type { Station } from "./types.js";
 export const mergeStationsWithSameId = (stations: Station[]): Station[] => {
   const g: Record<string, Station[]> = {};
   for (const station of stations) {
-    const key = station.properties.id;
+    const key = station.properties.id!;
     g[key] = [...(g[key] ?? []), station];
   }
 

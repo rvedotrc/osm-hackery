@@ -16,10 +16,8 @@ export const masterRelations = {
 export const alternateNames = {
   "Akademivej - DTU": ["Akademivej"],
   "Anker Engelunds Vej - DTU": ["Anker Engelunds Vej"],
-  "København H": ["KBH H", "Københavns Hovedbanegård"],
-  "København Syd": ["KBH Syd"],
+  "København H": ["Københavns Hovedbanegård"],
   "Glostrup Hospital - Rigshospitalet": ["Glostrup Hospital"],
-  Langgade: ["Valby Langgade"],
   "Lufthavnen (Metro)": [
     "Københavns Lufthavn",
     "Copenhagen Airport",

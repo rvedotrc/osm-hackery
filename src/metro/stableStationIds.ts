@@ -31,6 +31,7 @@ export const withStableStationIds = async (
       station.properties.name,
       station.properties.long_name,
       station.properties.short_name,
+      ...(station.properties.alternate_names ?? []),
     ]
       .filter((t) => t !== undefined)
       .map((s) => `${s}\0${station.properties.line}`);
