@@ -18,14 +18,10 @@
     "test:unit": "node --enable-source-maps --test './test/**/*.test.ts'"
   },
   "dependencies": {
-    "@blaahaj/geometry": "^1.1.0",
     "@blaahaj/gotcha": "^2.0.0",
     "axios": "^1.20.0",
-    "effect": "^3.22.2",
-    "fast-xml-parser": "^5.11.1",
     "geojson": "^0.5.0",
     "sax": "^1.6.1",
-    "type-fest": "^5.10.0",
     "write-file-atomic": "^8.0.0",
     "zod": "^4.6.7"
   },
